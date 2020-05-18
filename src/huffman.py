@@ -39,7 +39,6 @@ class Huffman:
             if curr.right:
                 dfs(curr.right,(sta<<1)|1)
             if curr.char:
-                print(curr.char, sta)
                 ba[sta]        = curr.char
                 ab[curr.char]  = sta
         dfs(tree,1)
