@@ -6,7 +6,7 @@ class Node:
         se.right = None
 
     def __str__(se):
-        return f'<{se.left}> {se.freq} : {se.char} <{se.right}>'
+        return f'{se.freq} : {se.char}'
     
     def __repr__(se):
         return se.__str__()
@@ -18,7 +18,7 @@ class Node:
         return se.freq > other.freq
     
     def __lt__(se,other):
-        return se.freq <= other.freq
+        return se.freq < other.freq
     
     def insert(se,other):
         new = Node(se.freq+other.freq)
