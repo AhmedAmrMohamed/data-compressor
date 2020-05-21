@@ -32,13 +32,13 @@ class Huffman:
         ba,ab = {}, {}
         def dfs(curr,sta):
             if curr.left:
-                dfs(curr.left,sta<<1)
+                dfs(curr.left,(sta<<1)
             if curr.right:
                 dfs(curr.right,(sta<<1)|1)
             if curr.char:
                 ba[sta]        = curr.char
                 ab[curr.char]  = sta
-        dfs(tree,0)
+        dfs(tree,1)
         return ba,ab
 
     def __default(self):
