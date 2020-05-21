@@ -5,23 +5,20 @@ import logging
 logging.basicConfig(level = 'INFO')
 #debug = logging.info
 class Huffman:
-    def __init__(self):
-        self.bnal = {} # maps binary to alpha
-        self.albn = {} # maps alpha to bn
+    def __init__(self,msg = None):
+        if msg:
+            self.msg = msg
+            self.bnal, self.albn = self.__default()
 
     def getfreqs(self,msg):
-        #debug('getting freq')
         freq = {}
         for i in msg:
             freq[i] = freq.get(i,0)+1
-        #debug(f'freq {freq}')
         return freq
 
     def build_tree(self,msg):
         # greater items to the left
-        #debug('msg '+msg)
         freq  = self.getfreqs(msg)
-        #debug(f'freq : {freq}')
         heap  = Heap(max=False)  # min heap
         for i in freq:
             heap.insert(Node(freq[i],i))
@@ -41,17 +38,10 @@ class Huffman:
             if curr.char:
                 ba[sta]        = curr.char
                 ab[curr.char]  = sta
-        dfs(tree,1)
+        dfs(tree,0)
         return ba,ab
 
-    def encode(self,tree,key):
-        pass
-        
-
-    def nav(self,root,dire):
-        ''' 
-        if    dire == 0 return left of root
-        elif
-        '''
-        pass
+    def __default(self):
+        self.tree = self.build_tree(self.msg)
+        return self.build_maps(self.tree)
 
