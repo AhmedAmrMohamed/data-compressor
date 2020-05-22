@@ -38,7 +38,7 @@ class Huffman:
             if curr.char:
                 ba[sta]        = curr.char
                 ab[curr.char]  = sta
-        dfs(tree,0)
+        dfs(tree,1)
         return ba,ab
 
     def __default(self):
