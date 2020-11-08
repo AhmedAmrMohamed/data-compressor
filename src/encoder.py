@@ -1,29 +1,27 @@
 from huffman import Huffman
-
+import pickle
 
 class Encoder:
-
-    
     def __init__(self,msg):
         self.huff = Huffman(msg)
         self.msg  = msg
-
-    def shifter(self,number,add):
-        lsb = number&1
-        bitlen  = lambda num: int.bit_length(num) - 1
-        number  = (number<< bitlen(add))|add
-        number  |= 1<<bitlen(add)
-        return number
-
-
+        self.key  = self.huff.albn
+    
     def encode(self):
-        msg     = self.msg
-        albn    = self.huff.albn
-        shifter = self.shifter
-        number  = 1
-        for al in msg:
-           bn = albn[al]
-           number = shifter(number,bn)
-        return number,self.huff.tree
+        msg    = self.msg
+        key    = self.key
+        number = 1
+        for let in msg:
+           huffcode = key[let]
+           for bit in huffcode:
+               number <<= 1
+               if bit=='1':
+                   number |= 1
+        return number
+    
+    def pickletree(self):
+        pickledtree = pickle.dumps(self.huff.tree)
+        return pickledtree
+
 
 

@@ -8,7 +8,8 @@ class Huffman:
     def __init__(self,msg = None):
         if msg:
             self.msg = msg
-            self.bnal, self.albn = self.__default()
+            self.tree = self.build_tree(self.msg)
+            self.albn = self.__default()
 
     def getfreqs(self,msg):
         freq = {}
@@ -32,16 +33,14 @@ class Huffman:
         ba,ab = {}, {}
         def dfs(curr,sta):
             if curr.left:
-                dfs(curr.left,sta<<1)
+                dfs(curr.left,sta+'0') #add 0
             if curr.right:
-                dfs(curr.right,(sta<<1)|1)
+                dfs(curr.right,sta+'1') #add 1
             if curr.char:
-                ba[sta]        = curr.char
                 ab[curr.char]  = sta
-        dfs(tree,1)
-        return ba,ab
+        dfs(tree,'')
+        return ab
 
     def __default(self):
-        self.tree = self.build_tree(self.msg)
         return self.build_maps(self.tree)
 

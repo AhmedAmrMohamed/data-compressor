@@ -21,9 +21,11 @@ class Node:
         return se.freq < other.freq
     
     def insert(se,other):
+        # other must be greater than or equal to self
+        assert other.freq >= se.freq, "error, other.freq should be greater"
         new = Node(se.freq+other.freq)
-        new.left  = se
-        new.right = other
+        new.left = other
+        new.right= se
         return new
 
 
@@ -34,10 +36,10 @@ def __test():
     c = Node(10,'c')
     
     mx = max(a,b,c)
-    print(mx)
+    print('max ', mx)
     
     a = a.insert(b)
-    z = a.insert(c)
-    print(z)
+    z = c.insert(a)
+    print('z is ', z, z.left.left, z.left.right, sep = '\n')
     
 
