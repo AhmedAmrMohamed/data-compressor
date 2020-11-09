@@ -12,24 +12,31 @@ class Encoder:
         self.key  = self.huff.albn
     
     def encode(self):
-        return self.msg
         debug('encoding')
         msg    = self.msg
         key    = self.key
-        number = 1
+        encodednum   = 1
         debug(f'len(msg) {len(msg)}')
-        # for let in msg:
-            # huffcode = key[let]
-            # for bit in huffcode:
-                # number <<= 1
-                # if bit=='1':
-                    # number |= 1
-        return number
+        for let in msg:
+            huffcode = key[let]
+            for bit in huffcode:
+                encodednum<<=1
+                if bit == '1':
+                    encodednum|=1
+        return encodednum
     
-    def pickletree(self):
-        debug('pickletree')
-        pickledtree = pickle.dumps(self.huff.tree)
-        return pickledtree
+    def keytostr(self):
+        key = self.key
+        ret = [f'{itr}:{key[itr]}' for itr in key]
+        return ','.join(ret)
+
+    def strtoint(self, strmsg):
+        number = 1
+        for i in strmsg:
+            number<<=1
+            if i == '1':
+                number|=1
+        return number
 
 
 

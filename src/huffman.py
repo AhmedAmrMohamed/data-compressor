@@ -3,7 +3,7 @@ from heap import Heap
 import logging
 
 logging.basicConfig(level = 'INFO')
-debug = logging.info
+#debug = logging.info
 class Huffman:
     def __init__(self,msg = None):
         if msg:
@@ -15,7 +15,7 @@ class Huffman:
         freq = {}
         for i in msg:
             freq[i] = freq.get(i,0)+1
-        debug(f'freq[0] {freq[0]}')
+        #debug(f'freq[0] {freq[0]}')
         return freq
 
     def build_tree(self,msg):
@@ -40,7 +40,7 @@ class Huffman:
             if curr.isleaf():
                 ab[curr.char]  = sta
         dfs(tree,'')
-        debug(f'key 0::> {ab[0]}')
+        #debug(f'key 0::> {ab[0]}')
         return ab
 
     def __default(self):
