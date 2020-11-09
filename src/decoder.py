@@ -5,11 +5,12 @@ class Decoder:
     def __init__(self, msg, key):
         print('msg', msg)
         self.key  = loads(key)
-        self.msg  = str(bin(msg))
+        # self.msg  = str(bin(msg))
+        self.msg = msg
         self.org  = self.decode()
 
     def decode(self):
-        itr = 3  # ignore the '0b1' prefix
+        itr = 0  # ignore the '0b1' prefix
         ret = [] 
         end = len(self.msg)
         while itr < end:

@@ -1,7 +1,7 @@
 class Node:
     def __init__(se,freq,char = None):
         se.freq  = freq
-        se.char  = char if char else None
+        se.char  = char if char!=None else None
         se.left  = None
         se.right = None
 
@@ -12,7 +12,7 @@ class Node:
         return se.__str__()
 
     def isleaf(se):
-        return bool(se.char)
+        return se.char != None
 
     def __gt__(se,other):
         return se.freq > other.freq

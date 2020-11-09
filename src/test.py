@@ -7,7 +7,7 @@ import time
 
 
 print('grabsomeopopcorn')
-msg = open('mobydick','r').read()
+msg = open('img','rb').read()
 
 
 ob  = Encoder(msg)
@@ -22,9 +22,10 @@ pt   = ob.pickletree()
 
 comprat = (sys.getsizeof(pt)+sys.getsizeof(num))/sys.getsizeof(msg)
 print(comprat)
-print(t1-t0)
+print('t1 ', t1-t0)
 
 print('---------decoding----------')
+print(num)
 do = Decoder(num, pt)
 t2 = time.time() 
 if do.org == msg:
