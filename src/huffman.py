@@ -8,19 +8,19 @@ class Huffman:
     def __init__(self,msg = None):
         if msg:
             self.msg = msg
-            self.tree = self.build_tree(self.msg)
-            self.albn = self.__default()
+            self.freq = self.getfreq(msg)
+            self.tree = self.build_tree(self.freq)
+            self.albn = self.build_maps(self.tree)
 
-    def getfreqs(self,msg):
+    def getfreq(self,msg):
         freq = {}
         for i in msg:
             freq[i] = freq.get(i,0)+1
         #debug(f'freq[0] {freq[0]}')
         return freq
 
-    def build_tree(self,msg):
+    def build_tree(self, freq):
         # greater items to the left
-        freq  = self.getfreqs(msg)
         heap  = Heap(max=False)  # min heap
         for i in freq:
             heap.insert(Node(freq[i],i))
@@ -43,6 +43,4 @@ class Huffman:
         #debug(f'key 0::> {ab[0]}')
         return ab
 
-    def __default(self):
-        return self.build_maps(self.tree)
 

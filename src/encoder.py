@@ -20,8 +20,8 @@ class Encoder:
         return int(encodedmsg,2)
     
     def keytostr(self):
-        key = self.key
-        ret = [f'{itr}:{key[itr]}' for itr in key]
-        return ','.join(ret)
+        freq = self.huff.freq
+        ret  = [f'{itr}{freq[itr]}' for itr in freq]
+        return ',,'.join(ret)
 
 
