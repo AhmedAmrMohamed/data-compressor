@@ -1,7 +1,7 @@
 class Node:
     def __init__(se,freq,char = None):
         se.freq  = freq
-        se.char  = char if char else None
+        se.char  = char if char!=None else None
         se.left  = None
         se.right = None
 
@@ -12,17 +12,19 @@ class Node:
         return se.__str__()
 
     def isleaf(se):
-        return bool(se.char)
+        return se.char != None
 
     def __gt__(se,other):
         return se.freq > other.freq
-    
+    def __eq__(se,other):
+        return se.freq == other.freq
     def __lt__(se,other):
         return se.freq < other.freq
     
     def insert(se,other):
         # other must be greater than or equal to self
-        assert other.freq >= se.freq, "error, other.freq should be greater"
+        # assert other.freq >= se.freq, "error, other.freq should be greater"
+        assert other.freq >= se.freq, f"error, other.freq should be greater, {se.char}:{se.freq}, {other.char}:{other.freq}"
         new = Node(se.freq+other.freq)
         new.left = other
         new.right= se

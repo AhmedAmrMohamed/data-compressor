@@ -1,5 +1,7 @@
 from huffman import Huffman
-import pickle
+import logging
+logging.basicConfig(level='INFO')
+debug = logging.debug
 
 class Encoder:
     def __init__(self,msg):
@@ -8,20 +10,15 @@ class Encoder:
         self.key  = self.huff.albn
     
     def encode(self):
+        debug('encoding')
         msg    = self.msg
         key    = self.key
-        number = 1
-        for let in msg:
-           huffcode = key[let]
-           for bit in huffcode:
-               number <<= 1
-               if bit=='1':
-                   number |= 1
-        return number
+        encodedmsg   = '1'+''.join([ key[itr] for itr in msg])
+        return encodedmsg
     
-    def pickletree(self):
-        pickledtree = pickle.dumps(self.huff.tree)
-        return pickledtree
-
+    def keytostr(self):
+        freq = self.huff.freq
+        ret  = [f'{itr}{freq[itr]}' for itr in freq]
+        return ',,'.join(ret)
 
 
