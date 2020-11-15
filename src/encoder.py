@@ -1,9 +1,7 @@
 from huffman import Huffman
-import pickle
-from time import time
 import logging
 logging.basicConfig(level='INFO')
-debug = logging.info
+debug = logging.debug
 
 class Encoder:
     def __init__(self,msg):
@@ -16,8 +14,7 @@ class Encoder:
         msg    = self.msg
         key    = self.key
         encodedmsg   = '1'+''.join([ key[itr] for itr in msg])
-        print('intint')
-        return int(encodedmsg,2)
+        return encodedmsg
     
     def keytostr(self):
         freq = self.huff.freq

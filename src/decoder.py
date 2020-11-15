@@ -3,6 +3,8 @@ from huffman import Huffman
 import CON
 class Decoder:
     def __init__(self, msg, key):
+        if not isinstance(msg, int):
+            raise RunTimeEorror("msg is not str")
         self.msg  = bin(msg)
         self.key  = self.parsekey(key)
         self.tree = self.gettree(self.key)

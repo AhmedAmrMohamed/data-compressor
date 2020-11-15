@@ -21,7 +21,7 @@ class Huffman:
 
     def build_tree(self, freq):
         # greater items to the left
-        heap  = Heap(max=False)  # min heap
+        heap  = Heap(max = False, key = lambda x,y:x<y)  # min heap
         for i in freq:
             heap.insert(Node(freq[i],i))
         while heap.size > 1:

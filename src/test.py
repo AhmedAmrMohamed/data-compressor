@@ -2,36 +2,34 @@ from encoder import Encoder
 from decoder import Decoder
 import sys
 # msg = 'Ahmed Amr !'
-# msg = 'aaaabbbcc,*&!@ : something'
+# msg = 'aaaabbbcc'
 import time
 
 
-# print('grabsomeopopcorn')
-# msg = open('img','rb').read()
-msg = open('moby','r').read()
-
+print('grabsomeopopcorn')
+msg = open('img','rb').read()
 
 
 ob  = Encoder(msg)
 t0  = time.time()
-enmsg = ob.encode()
-enkey = ob.keytostr()
+num = ob.encode()
+tree= ob.huff.tree
 t1  = time.time()
 
-# print(enmsg, enkey, sep='\n')
+
+import pickle
+pt   = ob.pickletree()
+
+comprat = (sys.getsizeof(pt)+sys.getsizeof(num))/sys.getsizeof(msg)
+print(comprat)
+print('t1 ', t1-t0)
 
 print('---------decoding----------')
-do = Decoder(enmsg, enkey)
+do = Decoder(num, pt)
 t2 = time.time() 
-print(t2-t1,'s')
-domsg = do.decodedmsg
-
-print('pass' if domsg == msg else 'fail')
-
-
-from sys import getsizeof
-gso = getsizeof
-comprat = (gso(enmsg)+gso(enkey))/\
-        gso(msg)
-
+if do.org == msg:
+    print('pass')
+else:
+    print('fail')
+print(t2-t1)
 
